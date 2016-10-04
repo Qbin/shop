@@ -1,0 +1,3 @@
+selenium
+MySQL-python
+Django==1.8
