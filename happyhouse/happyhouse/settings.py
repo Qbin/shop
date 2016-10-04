@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for happyhouse project.
 
@@ -37,6 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'boss',
+    'html5helper',
+    'smart_auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,7 +81,7 @@ WSGI_APPLICATION = 'happyhouse.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'csvt',                      # Or path to database file if using sqlite3.
+        'NAME': 'happyhouse',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '123456',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -103,3 +107,43 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 这个是菜单，只支持2级菜单
+MENUS = [
+    {"text": u"能力模型", "url":"", "children": [
+        {"text": u"能力类型", "url": "Category"},
+        {"text": u"题库管理", "url": "Problem"},
+        {"text": u"试卷管理", "url": "Paper"},
+        {"text": u"我的题目", "url": "ProblemMy"},
+        {"text": "divider", "url": "_", "divider": True},  #这个是分割线
+        {"text": u"历史评测", "url": "Exam"},
+        {"text": u"安排评测", "url": "ExamStart"},
+    ]},
+    {"text": u"服务器授权", "url":"", "children": [
+        {"text": u"密钥管理", "url": "CodePublicKey"},
+        {"text": "divider", "url": "_", "divider": True},
+        {"text": u"服务器", "url": "Server"},
+        {"text": u"授权日志", "url": "ServerInstallLog"},
+    ]},
+    {"text": u"市场营销", "url":"", "children": [
+        {"text": u"机会管理", "url": "Customer"}
+    ]},
+
+    {"text": u"系统管理", "url":"", "children": [
+        {"text": u"公司管理", "url": "Company"},
+        {"text": u"部门管理", "url": "Department"},
+        {"text": u"岗位管理", "url": "Position"},
+        {"text": u"项目管理", "url": "Project"},
+        {"text": u"人员管理", "url": "User"},
+        {"text": u"权限管理", "url": "UserPermission"},
+        {"text": u"人员组管理", "url": "UserGroup"},
+        {"text": "divider", "url": "_", "divider": True},
+        {"text": u"人员支出", "url": "UserExpense"},
+        {"text": u"项目支出", "url": "ProjectExpense"},
+    ]},
+]
+
+# API的代码目录
+APIS_DIR = os.path.join(BASE_DIR, "smart_auth/apis/")
+APIS_PREFIX = "smart_auth.apis"
+
